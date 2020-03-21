@@ -18,7 +18,8 @@ horizontal and diagonal lines.
 
 Construction of an ulam spiral (source [_Wikipedia_](https://en.wikipedia.org/wiki/Ulam_spiral)):
 
-![Ulam Spiral image 1](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Ulam_spiral_howto_all_numbers.svg/200px-Ulam_spiral_howto_all_numbers.svg.png) ![Ulam Spiral image 2](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Ulam_spiral_howto_primes_only.svg/200px-Ulam_spiral_howto_primes_only.svg.png)
+![Ulam Spiral image 1](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Ulam_spiral_howto_all_numbers.svg/200px-Ulam_spiral_howto_all_numbers.svg.png)
+![Ulam Spiral image 2](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Ulam_spiral_howto_primes_only.svg/200px-Ulam_spiral_howto_primes_only.svg.png)
 
 ### Sieve of Eratosthenes 🇬🇷
 
@@ -44,6 +45,29 @@ $ cd build/
 $ cmake .. -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles"
 $ make all
 $ ./bin/ulam-spiral
+```
+
+### Running tests
+
+I'm using [googletest](https://github.com/google/googletest) `release-1.10.0`. It is added as a git
+submodule. In order to run tests, you have to checkout this repo with submodules. You can do it
+with:
+
+```
+$ git submodule update --init --recursive
+```
+
+Alternatively, you can download all submodules during cloning:
+
+```
+$ git clone --recursive git://github.com/pniewiejski/luhnjs.git
+```
+
+```
+$ cd build/
+$ cmake .. -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles"
+$ make all
+$ ./bin/ulam-spiral_test
 ```
 
 ## Code style ✍️
