@@ -1,3 +1,6 @@
+# Editor
+.vscode/
+
 # exclude everything
 build/*
 
