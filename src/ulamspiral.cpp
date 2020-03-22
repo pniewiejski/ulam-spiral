@@ -1,6 +1,6 @@
 #include "ulamspiral.hpp"
 
-std::shared_ptr<std::vector<bool>> ulamspiral::sieveOfEratosthenes(int range) {
+const std::shared_ptr<std::vector<bool>> ulamspiral::sieveOfEratosthenes(const int range) {
   auto sieve = std::make_shared<std::vector<bool>>(std::vector<bool>(range, true));
 
   sieve->at(0) = false;  // 1 is not a prime number
@@ -21,11 +21,11 @@ std::shared_ptr<std::vector<bool>> ulamspiral::sieveOfEratosthenes(int range) {
   return sieve;
 }
 
-int ulamspiral::computeNumbersRange(int width) {
+const int ulamspiral::computeNumbersRange(const int width) {
   return (width * width) + 1;
 }
 
-std::shared_ptr<std::vector<bool>> ulamspiral::makeUlamSpiral(int width) {
+const std::shared_ptr<std::vector<bool>> ulamspiral::makeUlamSpiral(const int width) {
   int range = ulamspiral::computeNumbersRange(width);
   auto sievedNumbers = ulamspiral::sieveOfEratosthenes(range);
   auto spiral = std::make_shared<std::vector<bool>>(std::vector<bool>(width * width));
@@ -87,4 +87,24 @@ std::shared_ptr<std::vector<bool>> ulamspiral::makeUlamSpiral(int width) {
 #endif
 
   return spiral;
+}
+
+void ulamspiral::saveToFile(std::shared_ptr<std::vector<bool>> spiral, int width,
+                            const std::string& fileName) {
+  if (width * width != spiral->size()) {
+    throw std::invalid_argument("Provided width doesn't match the size of spiral");
+  }
+
+  std::ofstream image(fileName);
+  image << "P1\n";
+  image << width << " " << width << "\n";
+
+  for (int i = 0; i < width; i++) {
+    for (int j = 0; j < width; j++) {
+      image << spiral->at(j + i * width) << " ";
+    }
+    image << "\n";
+  }
+
+  image.close();
 }

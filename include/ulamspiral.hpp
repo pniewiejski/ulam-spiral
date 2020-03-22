@@ -1,4 +1,5 @@
 #pragma once
+#include <fstream>
 #include <memory>
 #include <vector>
 
@@ -12,12 +13,18 @@
 #define DIRECTION_LEFT 2
 
 namespace ulamspiral {
-int computeNumbersRange(int width);
-std::shared_ptr<std::vector<bool>> sieveOfEratosthenes(int range);
-std::shared_ptr<std::vector<bool>> makeUlamSpiral(int width);
+const int computeNumbersRange(const int width);
+const std::shared_ptr<std::vector<bool>> sieveOfEratosthenes(const int range);
+const std::shared_ptr<std::vector<bool>> makeUlamSpiral(const int width);
+void saveToFile(std::shared_ptr<std::vector<bool>> spiral, const int width,
+                const std::string& fileName);
 
 struct Point {
   int x;  // column
   int y;  // row
+};
+struct Spiral {
+  const std::shared_ptr<std::vector<bool>> spiral;
+  const int width;
 };
 }  // namespace ulamspiral
