@@ -7,6 +7,8 @@
 #include <iostream>
 #endif
 
+#define MAX_WIDTH 46340
+
 #define DIRECTION_UP 1
 #define DIRECTION_DOWN 3
 #define DIRECTION_RIGHT 0

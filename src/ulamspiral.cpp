@@ -88,8 +88,8 @@ const Spiral ulamspiral::makeUlamSpiral(const int width) {
 
 #ifdef DEBUG
   std::cout << std::endl;
-  for (int i = 0; i < width; i++) {
-    for (int j = 0; j < width; j++) {
+  for (int i = 0; i < width; ++i) {
+    for (int j = 0; j < width; ++j) {
       std::cout << spiral->at(j + i * width) << " ";
     }
     std::cout << std::endl;
@@ -105,8 +105,8 @@ void ulamspiral::saveToFile(const Spiral& spiral, const std::string& fileName) {
   image << "P1\n";
   image << spiral.width << " " << spiral.width << "\n";
 
-  for (int i = 0; i < spiral.width; i++) {
-    for (int j = 0; j < spiral.width; j++) {
+  for (int i = 0; i < spiral.width; ++i) {
+    for (int j = 0; j < spiral.width; ++j) {
       image << spiral.spiral->at(j + i * spiral.width) << " ";
     }
     image << "\n";
