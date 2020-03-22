@@ -12,13 +12,6 @@
 #define DIRECTION_RIGHT 0
 #define DIRECTION_LEFT 2
 
-namespace ulamspiral {
-const int computeNumbersRange(const int width);
-const std::shared_ptr<std::vector<bool>> sieveOfEratosthenes(const int range);
-const std::shared_ptr<std::vector<bool>> makeUlamSpiral(const int width);
-void saveToFile(std::shared_ptr<std::vector<bool>> spiral, const int width,
-                const std::string& fileName);
-
 struct Point {
   int x;  // column
   int y;  // row
@@ -27,4 +20,10 @@ struct Spiral {
   const std::shared_ptr<std::vector<bool>> spiral;
   const int width;
 };
+
+namespace ulamspiral {
+const int computeNumbersRange(const int width);
+const std::shared_ptr<std::vector<bool>> sieveOfEratosthenes(const int range);
+const Spiral makeUlamSpiral(const int width);
+void saveToFile(const Spiral& spiral, const std::string& fileName);
 }  // namespace ulamspiral

@@ -25,14 +25,24 @@ const int ulamspiral::computeNumbersRange(const int width) {
   return (width * width) + 1;
 }
 
-const std::shared_ptr<std::vector<bool>> ulamspiral::makeUlamSpiral(const int width) {
+const Spiral ulamspiral::makeUlamSpiral(const int width) {
   int range = ulamspiral::computeNumbersRange(width);
   auto sievedNumbers = ulamspiral::sieveOfEratosthenes(range);
   auto spiral = std::make_shared<std::vector<bool>>(std::vector<bool>(width * width));
 
+#ifdef DEBUG
+  std::cout << "Generating spiral with width=" << width << " range=" << range
+            << " sieved size=" << sievedNumbers->size() << " spiral size=" << spiral->size()
+            << std::endl;
+#endif
+
   Point point = {// start from the middle of "square"
                  .x = width % 2 ? width / 2 : (width / 2) - 1,
                  .y = width % 2 ? width / 2 : (width / 2) - 1};
+
+#ifdef DEBUG
+  std::cout << "Initial point set to: x= " << point.x << "; y= " << point.y << std::endl;
+#endif
 
   int directionIndicator = 0;
   int stepsToNextTurn = 1;
@@ -55,8 +65,8 @@ const std::shared_ptr<std::vector<bool>> ulamspiral::makeUlamSpiral(const int wi
 
   for (int i = 0; i < spiral->size(); ++i) {
 #ifdef DEBUG
-    std::cout << "Assign to spiral at (" << point.x + 1 << ";" << point.y + 1 << ") a value of "
-              << sievedNumbers->at(i) << std::endl;
+    std::cout << "Step: (" << i << "/" << spiral->size() << ") Assign to spiral at (" << point.x
+              << ";" << point.y << ") a value of " << sievedNumbers->at(i) << std::endl;
 #endif
     spiral->at(point.y * width + point.x) = sievedNumbers->at(i);
 
@@ -86,22 +96,18 @@ const std::shared_ptr<std::vector<bool>> ulamspiral::makeUlamSpiral(const int wi
   }
 #endif
 
-  return spiral;
+  Spiral tmp = {.spiral = spiral, .width = width};
+  return tmp;
 }
 
-void ulamspiral::saveToFile(std::shared_ptr<std::vector<bool>> spiral, int width,
-                            const std::string& fileName) {
-  if (width * width != spiral->size()) {
-    throw std::invalid_argument("Provided width doesn't match the size of spiral");
-  }
-
-  std::ofstream image(fileName);
+void ulamspiral::saveToFile(const Spiral& spiral, const std::string& fileName) {
+  std::ofstream image(fileName, std::ofstream::trunc);
   image << "P1\n";
-  image << width << " " << width << "\n";
+  image << spiral.width << " " << spiral.width << "\n";
 
-  for (int i = 0; i < width; i++) {
-    for (int j = 0; j < width; j++) {
-      image << spiral->at(j + i * width) << " ";
+  for (int i = 0; i < spiral.width; i++) {
+    for (int j = 0; j < spiral.width; j++) {
+      image << spiral.spiral->at(j + i * spiral.width) << " ";
     }
     image << "\n";
   }
