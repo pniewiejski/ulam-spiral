@@ -21,50 +21,54 @@ std::shared_ptr<std::vector<bool>> ulamspiral::sieveOfEratosthenes(int range) {
   return sieve;
 }
 
-int ulamspiral::computeNumbersRange(int width) { return (width * width) + 1; }
+int ulamspiral::computeNumbersRange(int width) {
+  return (width * width) + 1;
+}
 
 std::shared_ptr<std::vector<bool>> ulamspiral::makeUlamSpiral(int width) {
   int range = ulamspiral::computeNumbersRange(width);
   auto sievedNumbers = ulamspiral::sieveOfEratosthenes(range);
   auto spiral = std::make_shared<std::vector<bool>>(std::vector<bool>(width * width));
 
-  int pointX;
-  int pointY;
-
-  if (width % 2) {
-    pointX = width / 2;
-  } else {
-    pointX = (width / 2) - 1;
-  }
-
-  pointY = pointX;
+  Point point = {// start from the middle of "square"
+                 .x = width % 2 ? width / 2 : (width / 2) - 1,
+                 .y = width % 2 ? width / 2 : (width / 2) - 1};
 
   int directionIndicator = 0;
   int stepsToNextTurn = 1;
   int spiralSideLength = 1;
 
+  auto getDirection = [&directionIndicator]() { return directionIndicator % 4; };
+  auto updateDirection = [&point, &getDirection]() {
+    switch (getDirection()) {
+      case DIRECTION_UP:
+        return point.y--;
+      case DIRECTION_DOWN:
+        return point.y++;
+      case DIRECTION_RIGHT:
+        return point.x++;
+      case DIRECTION_LEFT:
+        return point.x--;
+    }
+    return 0;
+  };
+
   for (int i = 0; i < spiral->size(); ++i) {
 #ifdef DEBUG
-    std::cout << "Assign to spiral at (" << pointX + 1 << ";" << pointY + 1 << ") a value of "
+    std::cout << "Assign to spiral at (" << point.x + 1 << ";" << point.y + 1 << ") a value of "
               << sievedNumbers->at(i) << std::endl;
 #endif
-    spiral->at(pointY * width + pointX) = sievedNumbers->at(i);
+    spiral->at(point.y * width + point.x) = sievedNumbers->at(i);
 
     stepsToNextTurn--;
-
-    if (!stepsToNextTurn && (directionIndicator % 4 == 1 || directionIndicator % 4 == 3)) {
+    int currentDirection = getDirection();
+    if (!stepsToNextTurn &&
+        (currentDirection == DIRECTION_UP || currentDirection == DIRECTION_DOWN)) {
       // Notice that the length of spiral's side increasing only when turning up or down.
       spiralSideLength++;
     }
 
-    if (directionIndicator % 4 == 1)
-      pointY--;  // move up
-    else if (directionIndicator % 4 == 2)
-      pointX--;  // move left
-    else if (directionIndicator % 4 == 3)
-      pointY++;  // move down
-    else
-      pointX++;  // move right
+    updateDirection();
 
     if (!stepsToNextTurn) {
       stepsToNextTurn = spiralSideLength;
@@ -73,9 +77,6 @@ std::shared_ptr<std::vector<bool>> ulamspiral::makeUlamSpiral(int width) {
   }
 
 #ifdef DEBUG
-  for (int i = 0; i < range - 1; i++) {
-    std::cout << spiral->at(i);
-  }
   std::cout << std::endl;
   for (int i = 0; i < width; i++) {
     for (int j = 0; j < width; j++) {
