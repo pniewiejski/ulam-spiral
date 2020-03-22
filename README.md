@@ -78,3 +78,8 @@ that runs the `clang-format` command. `clang-format` config was generated using:
 ```
 $ clang-format -style=google -dump-config > .clang-format
 ```
+
+## Image file format
+
+I'm using [Netpbm](https://en.wikipedia.org/wiki/Netpbm)'s portable bitmap format (`P1`) because
+there's hardly anything more simple than that 😜.
