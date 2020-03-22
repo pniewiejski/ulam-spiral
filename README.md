@@ -1,5 +1,7 @@
 # Ulam Spiral ꩜
 
+![C++ unit badge](https://github.com/pniewiejski/ulam-spiral/workflows/C++%20unit/badge.svg)
+
 This program generates an ulam spiral and saves it to a `*.ppm` image file. I've used the sieve of
 Eratosthenes in order to find all primes under a max value which is calculated from the, provided by
 user, width of the out-image.
@@ -86,4 +88,4 @@ $ clang-format -style=google -dump-config > .clang-format
 ## Image file format
 
 I'm using [Netpbm](https://en.wikipedia.org/wiki/Netpbm)'s portable bitmap format (`P1`) because
-there's hardly anything more simple than that 😜.
+there's hardly anything simpler than that 😜.
