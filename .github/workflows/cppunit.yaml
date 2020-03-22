@@ -1,0 +1,20 @@
+
+name: "C++ unit"
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with: 
+        submodules: true
+    - name: Build CMake
+      run: |
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles"
+    - name: Build and run unit tests
+      run: |
+        cd build
+        make ulam-spiral_test
+        ./bin/ulam-spiral_test
