@@ -4,6 +4,10 @@ This program generates an ulam spiral and saves it to a `*.ppm` image file. I've
 Eratosthenes in order to find all primes under a max value which is calculated from the, provided by
 user, width of the out-image.
 
+<p align="center">
+<img src="./docs/example.png" alt="example output converted to png">
+</p>
+
 ### Ulam spiral 🇵🇱
 
 Ulam spiral is a graphical way of presenting the set of prime numbers. It was firstly described by a
