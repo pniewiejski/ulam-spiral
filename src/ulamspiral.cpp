@@ -38,7 +38,7 @@ const Spiral ulamspiral::makeUlamSpiral(const int width) {
 
   Point point = {// start from the middle of "square"
                  .x = width % 2 ? width / 2 : (width / 2) - 1,
-                 .y = width % 2 ? width / 2 : (width / 2) - 1};
+                 .y = width % 2 ? width / 2 : (width / 2)};
 
 #ifdef DEBUG
   std::cout << "Initial point set to: x= " << point.x << "; y= " << point.y << std::endl;
