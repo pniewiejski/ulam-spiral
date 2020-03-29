@@ -48,8 +48,8 @@ const Spiral ulamspiral::makeUlamSpiral(const int width) {
   int stepsToNextTurn = 1;
   int spiralSideLength = 1;
 
-  const auto getDirection = [&directionIndicator]() { return directionIndicator % 4; };
-  const auto updateDirection = [&point, &getDirection]() {
+  const auto getDirection = [&directionIndicator]() -> int { return directionIndicator % 4; };
+  const auto updateDirection = [&point, &getDirection]() -> int {
     switch (getDirection()) {
       case DIRECTION_UP:
         return point.y--;
