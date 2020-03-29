@@ -1,7 +1,7 @@
 #include "ulamspiral.hpp"
 
 const std::shared_ptr<std::vector<bool>> ulamspiral::sieveOfEratosthenes(const int range) {
-  auto sieve = std::make_shared<std::vector<bool>>(std::vector<bool>(range, true));
+  const auto sieve = std::make_shared<std::vector<bool>>(std::vector<bool>(range, true));
 
   sieve->at(0) = false;  // 1 is not a prime number
 
@@ -26,9 +26,9 @@ const int ulamspiral::computeNumbersRange(const int width) {
 }
 
 const Spiral ulamspiral::makeUlamSpiral(const int width) {
-  int range = ulamspiral::computeNumbersRange(width);
-  auto sievedNumbers = ulamspiral::sieveOfEratosthenes(range);
-  auto spiral = std::make_shared<std::vector<bool>>(std::vector<bool>(width * width));
+  const int range = ulamspiral::computeNumbersRange(width);
+  const auto sievedNumbers = ulamspiral::sieveOfEratosthenes(range);
+  const auto spiral = std::make_shared<std::vector<bool>>(std::vector<bool>(width * width));
 
 #ifdef DEBUG
   std::cout << "Generating spiral with width=" << width << " range=" << range
@@ -48,8 +48,8 @@ const Spiral ulamspiral::makeUlamSpiral(const int width) {
   int stepsToNextTurn = 1;
   int spiralSideLength = 1;
 
-  auto getDirection = [&directionIndicator]() { return directionIndicator % 4; };
-  auto updateDirection = [&point, &getDirection]() {
+  const auto getDirection = [&directionIndicator]() { return directionIndicator % 4; };
+  const auto updateDirection = [&point, &getDirection]() {
     switch (getDirection()) {
       case DIRECTION_UP:
         return point.y--;
@@ -71,7 +71,7 @@ const Spiral ulamspiral::makeUlamSpiral(const int width) {
     spiral->at(point.y * width + point.x) = sievedNumbers->at(i);
 
     stepsToNextTurn--;
-    int currentDirection = getDirection();
+    const int currentDirection = getDirection();
     if (!stepsToNextTurn &&
         (currentDirection == DIRECTION_UP || currentDirection == DIRECTION_DOWN)) {
       // Notice that the length of spiral's side increasing only when turning up or down.
