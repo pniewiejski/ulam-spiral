@@ -9,3 +9,4 @@ add_library(${BINARY}_lib STATIC ${SOURCES})
 if (USE_DEBUG)
   add_definitions(-DDEBUG)
 endif()
+
