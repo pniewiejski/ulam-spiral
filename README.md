@@ -3,8 +3,8 @@
 ![C++ unit badge](https://github.com/pniewiejski/ulam-spiral/workflows/C++%20unit/badge.svg)
 
 This program generates an ulam spiral and saves it to a `*.ppm` image file. I've used the sieve of
-Eratosthenes in order to find all primes under a max value which is calculated from the, provided by
-user, width of the out-image.
+Eratosthenes to find all primes under a _max_ value which is calculated from the, provided by user,
+width of the out-image.
 
 <p align="center">
 <img src="./docs/example.png" alt="example output converted to png">
@@ -32,7 +32,7 @@ Construction of an ulam spiral (source [_Wikipedia_](https://en.wikipedia.org/wi
 This is a simple algorithm that allows to find all prime numbers up to a specified _max_ value.
 
 The algorithm iteratively marks every
-[_composite number_](https://en.wikipedia.org/wiki/Composite_number) (this a number that is not
+[_composite number_](https://en.wikipedia.org/wiki/Composite_number) (this is a number that is not
 prime 💁‍♂️) by calculating multiples of prime numbers. It starts from the first prime number (2).
 
 ### Further reading 🔎
