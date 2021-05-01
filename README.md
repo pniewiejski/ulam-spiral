@@ -3,8 +3,8 @@
 ![C++ unit badge](https://github.com/pniewiejski/ulam-spiral/workflows/C++%20unit/badge.svg)
 
 This program generates an ulam spiral and saves it to a `*.ppm` image file. I've used the sieve of
-Eratosthenes to find all primes under a _max_ value which is calculated from the, provided by user,
-width of the out-image.
+Eratosthenes to find all primes under a _max_ value which is calculated from the width of the
+out-image.
 
 <p align="center">
 <img src="./docs/example.png" alt="example output converted to png">
